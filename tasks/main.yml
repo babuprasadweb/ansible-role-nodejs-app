@@ -67,4 +67,3 @@
     owner=nobody
     group=nogroup
   changed_when: false
-
