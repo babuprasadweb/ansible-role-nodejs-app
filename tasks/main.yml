@@ -39,6 +39,8 @@
   template: >
     src=upstart-master.conf.j2
     dest=/etc/init/{{ nodejs_app.service }}.conf
+    owner=root
+    group=root
     mode=0644
   notify: restart {{ nodejs_app.service }}
 
@@ -47,6 +49,8 @@
   template: >
     src=upstart-worker.conf.j2
     dest=/etc/init/{{ nodejs_app.service }}-{{ item }}.conf
+    owner=root
+    group=root
     mode=0644
   notify: restart {{ nodejs_app.service }}
   with_sequence: start=1 end={{ nodejs_app.workers }}
