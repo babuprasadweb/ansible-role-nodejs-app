@@ -1,5 +1,4 @@
 export PATH="./node_modules/.bin:$PATH"
-export PORT={{ nodejs_app.port }}
 {% for k, v in nodejs_app.env.iteritems() %}
 export {{ k }}='{{ v }}'
 {% endfor %}

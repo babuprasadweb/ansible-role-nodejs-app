@@ -5,7 +5,7 @@
     state=directory
     owner={{ ansible_ssh_user }}
     group={{ ansible_ssh_user }}
-  when: is_shared_fs == False
+  when: not nodejs_app.skip_clone
 
 - name: clone repository
   git: >
@@ -13,7 +13,7 @@
     dest={{ nodejs_app.dir }}
     version={{ nodejs_app.version }}
   notify: restart {{ nodejs_app.service }}
-  when: is_shared_fs == False
+  when: not nodejs_app.skip_clone
 
 - name: npm install
   command: >
@@ -32,7 +32,7 @@
     /usr/local/bin/direnv allow
     chdir={{ nodejs_app.dir }}
   register: result
-  changed_when: result.rc != 0
+  changed_when: false
 
 - name: generate master upstart script
   sudo: true
