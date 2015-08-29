@@ -53,7 +53,8 @@
     group=root
     mode=0644
   notify: restart {{ nodejs_app.service }}
-  with_sequence: start=1 end={{ nodejs_app.workers }}
+  # hotfix, see https://github.com/ansible/ansible/issues/11422
+  with_items: [1]
 
 - name: create logs directory
   sudo: true
